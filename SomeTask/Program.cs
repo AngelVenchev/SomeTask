@@ -214,16 +214,18 @@ namespace SomeTask
             foreach (var letter in newFeedback.ExtraLetters)
             {
                 newTotal.ExtraLetters.Add(letter);
-                HashSet<char> hidden = new HashSet<char>();
-                for (int i = 0; i < newTotal.Answer.Count; i++)
-                {
-                    if (oldFeedback.Answer[i] == '?')
-                    {
-                        hidden.Add(word[i]);
-                    }
-                }
-                newTotal.ExtraLetters = newTotal.ExtraLetters.Intersect(hidden).ToHashSet();
             }
+
+            HashSet<char> hidden = new HashSet<char>();
+            for (int i = 0; i < newTotal.Answer.Count; i++)
+            {
+                if (newTotal.Answer[i] == '?')
+                {
+                    hidden.Add(word[i]);
+                }
+            }
+            newTotal.ExtraLetters = newTotal.ExtraLetters.Intersect(hidden).ToHashSet();
+
             return newTotal;
         }
 
