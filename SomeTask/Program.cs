@@ -44,11 +44,6 @@ namespace SomeTask
 
     class Game
     {
-        public Game()
-        {
-
-        }
-
         private HashSet<string> words;
         private Feedback total = new Feedback();
 
@@ -84,13 +79,14 @@ namespace SomeTask
                     {
                         var possibleFeedback = GenerateFeedback(normalizedInput, possibleWord);
                         Feedback possibleTotal = GenerateTotalFeedback(this.total, possibleFeedback, possibleWord);
-                        var martchingWords = GetMatchingWords(possibleTotal, this.words);
-                        if (martchingWords.Count > maxGrade)
+                        var matchingWords = GetMatchingWords(possibleTotal, this.words);
+                        if (matchingWords.Count > maxGrade)
                         {
-                            bestMatchingWords = martchingWords;
-                            maxGrade = martchingWords.Count;
+                            bestMatchingWords = matchingWords;
+                            maxGrade = matchingWords.Count;
                             currentFeedback = possibleFeedback;
                             totalFeedback = possibleTotal;
+                            Console.WriteLine($"Checking word {possibleWord} with {matchingWords.Count} matching words");
                         }
                     }
 
